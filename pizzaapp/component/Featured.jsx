@@ -1,8 +1,9 @@
-import React from 'react'
-import Image from 'next/image'
+import React, { useState } from 'react'
+import Image from "next/legacy/image";
 import styles from '../styles/Featured.module.css'
 
 function Featured() {
+    const [index, setIndex] = useState(0)
     const images = [
         '/img/featured.png',
         '/img/featured2.png',
@@ -10,16 +11,21 @@ function Featured() {
     ]
   return (
     <div className={styles.container}>
-        <Image src='/img/arrowl.png' alt='' layout='fill'/>
-        <div className={styles.wrapper}>
-            <div className={styles.imgContainer}>
-                {images.map((img, i)=>{
-                    <Image key={i} src='/img/featured.png' alt='' layout='fill'/>
-                })}
-            </div>
+        <div className={styles.arrowContainer}>
+        <Image className={styles.arrowL} src='/img/arrowl.png' alt='' layout='fill' style={{left:0}}/>
         </div>
-        <Image src='/img/arrowr.png' alt='' layout='fill'/>
-        
+        <div className={styles.wrapper}>
+                {
+                    images.map((img, i)=>(
+                    <div className={styles.imgContainer}  key={i} >
+                <Image src={img} alt='' layout='fill' objectFit='contain'/>
+                    </div>
+                ))
+                }
+        </div>
+        <div className={styles.arrowContainer} style={{right:0}}>
+        <Image className={styles.arrowR} src='/img/arrowr.png' alt='' layout='fill'/>
+        </div>
     </div>
   )
 }
