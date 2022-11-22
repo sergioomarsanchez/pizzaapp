@@ -1,9 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from "next/legacy/image";
 import styles from '../styles/Featured.module.css'
 
 function Featured() {
     const [index, setIndex] = useState(0)
+
+    const handleArrow = (direction)=>{
+
+        if(direction==='l'){
+            setIndex(index!==0?index-1:2)
+        }
+        if(direction==='r'){
+            setIndex(index!==2?index+1:0)
+        }
+    }
+ useEffect(() => {
+setTimeout(() => {
+    handleArrow('r')
+}, 5000);
+ }, [index])
+ 
     const images = [
         '/img/featured.png',
         '/img/featured2.png',
@@ -11,10 +27,10 @@ function Featured() {
     ]
   return (
     <div className={styles.container}>
-        <div className={styles.arrowContainer}>
+        <div className={styles.arrowContainer} onClick={()=>handleArrow('l')}>
         <Image className={styles.arrowL} src='/img/arrowl.png' alt='' layout='fill' style={{left:0}}/>
         </div>
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={{transform: `translateX(${-100*index}VW)`}}>
                 {
                     images.map((img, i)=>(
                     <div className={styles.imgContainer}  key={i} >
@@ -23,7 +39,7 @@ function Featured() {
                 ))
                 }
         </div>
-        <div className={styles.arrowContainer} style={{right:0}}>
+        <div className={styles.arrowContainer} style={{right:0}} onClick={()=>handleArrow('r')}>
         <Image className={styles.arrowR} src='/img/arrowr.png' alt='' layout='fill'/>
         </div>
     </div>
