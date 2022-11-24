@@ -15,10 +15,12 @@ function Featured() {
         }
     }
  useEffect(() => {
-setTimeout(() => {
-    handleArrow('r')
-}, 5000);
- }, [index])
+    const interval = setInterval(function test() {
+        handleArrow('r')
+      return test;
+    }, 5000);
+    return () => clearInterval(interval);
+  });
  
     const images = [
         '/img/featured.png',

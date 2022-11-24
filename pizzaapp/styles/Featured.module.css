@@ -27,7 +27,7 @@
 @keyframes bounceR {
     0% {transform: translateX(0%)}
     25% {transform: translateX(15%)}
-    50% {transform: translateX(30%)}
+    50% {transform: translateX(25%)}
 }
 .arrowL{
     animation: bounceL 2s infinite linear;
@@ -43,7 +43,7 @@
 @keyframes bounceL {
     0% {transform: translateX(0%)}
     25% {transform: translateX(-15%)}
-    50% {transform: translateX(-30%)}
+    50% {transform: translateX(-25%)}
 }
 
 .wrapper{
