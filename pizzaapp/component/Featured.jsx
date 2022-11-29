@@ -4,7 +4,7 @@ import styles from '../styles/Featured.module.css'
 
 function Featured() {
     const [index, setIndex] = useState(0)
-
+ 
     const handleArrow = (direction)=>{
 
         if(direction==='l'){
