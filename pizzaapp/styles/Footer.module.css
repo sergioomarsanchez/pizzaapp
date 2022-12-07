@@ -36,3 +36,26 @@
     padding-top: 0;
     color: rgb(188, 102, 102);
 }
+
+@media screen and (max-width:480px) {
+
+    .container{
+        height: auto;
+        text-align: center;
+    }
+  .item:first-child{
+      display: none;
+  }
+  .item:last-child{
+      flex-direction: column;
+  }
+  .title{
+      font-size: 15px;
+  }
+  .text{
+      font-size: 10px;
+  }
+  .motto{
+      font-size: medium;
+  }
+}

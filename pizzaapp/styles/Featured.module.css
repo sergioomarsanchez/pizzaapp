@@ -57,3 +57,15 @@
     width: 100vw;
     height: 100%;
 }
+
+@media screen and (max-width:480px) {
+    .container{
+        height: 30.8vh;
+    }
+    .arrowContainer{
+        width: 30px;
+        height: 30px;
+        top: -25rem;
+        background-color: #d1421e6a;
+    }
+}
