@@ -113,15 +113,77 @@
 }
 
 .button:disabled{
-    background-color: rgb(112, 112, 112);
-    border: 1px solid rgb(56, 56, 56);
-    color: rgb(56, 56, 56);
+    background-color: rgb(191, 191, 191);
+    border: 1px solid rgb(167, 167, 167);
+    color: teal;
 }
 
 .button:disabled:active{
     background-color: rgb(112, 112, 112);
-    border: 1px solid rgb(56, 56, 56);
-    color: rgb(56, 56, 56);
+    border: 1px solid rgb(148, 148, 148);
+    color: teal;
     transform: none;
 }
 
+
+@media screen and (max-width:480px) {
+    .container{
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .table{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .trTitle{
+        display: none;
+    }
+    .tr{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    .id::before{
+        content: 'Order ID: ';
+        font-weight: 500;
+    }
+    .name::before{
+        content: 'Client Name: ';
+        font-weight: 500;
+    }
+    .address::before{
+        content: 'Address: ';
+        font-weight: 500;
+    }
+    .total::before{
+        content: 'TOTAL: ';
+        font-weight: 500;
+    }
+    .right{
+        width: 100%;
+        justify-content: center;
+    }
+    .row:first-child{
+        margin-top: 2rem;
+    }
+    .row:last-child{
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 6rem;
+    }
+    .done, .undone, .inProgress{
+        margin: 1rem;
+    }
+    .right{
+        width: 100%;
+       display: flex;
+       justify-content: center;
+    }
+}

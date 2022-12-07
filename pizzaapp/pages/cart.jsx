@@ -7,7 +7,7 @@ function Cart() {
         <div className={style.left}>
             <table className={style.table}>
                 <tbody>
-                <tr className={style.tr}>
+                <tr className={style.trTitle}>
                     <th>Product</th>
                     <th>Name</th>
                     <th>Extras</th>

@@ -99,3 +99,32 @@
     cursor: pointer;
     border-radius: 5px;
 }
+
+@media screen and (max-width:480px) {
+    .container{
+        height: auto;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .imgContainer{
+        width: 70vw;
+        height: 40vh;
+    }
+    .sizes{
+        width: 100%;
+        justify-content: space-around;
+    }
+    .add{
+        display: flex;
+       flex-direction: column;
+       align-items: center;
+    }
+    .button{
+        margin-top: 1rem;
+        margin-left: 0;
+        padding: 20px;
+        padding-bottom: 30px;
+        justify-content: center;
+    }
+}
