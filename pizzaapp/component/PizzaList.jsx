@@ -3,7 +3,8 @@ import style from '../styles/PizzaList.module.css'
 import PizzaCard from './PizzaCard'
 
 
-function PizzaList() {
+function PizzaList({pizzaList}) {
+  console.log(pizzaList)
   return (
     <div className={style.container}>
         <h1 className={style.title}>The best Pizza in Town</h1>
@@ -12,14 +13,11 @@ function PizzaList() {
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
          nisi ut aliquip ex ea commodo consequat.</p>
         <div className={style.wrapper}>
-        <PizzaCard/>
-        <PizzaCard/>
-        <PizzaCard/>
-        <PizzaCard/>
-        <PizzaCard/>
-        <PizzaCard/>
-        <PizzaCard/>
-        <PizzaCard/>
+          {pizzaList.map(pizza=>{
+            return(<PizzaCard key={pizza._id} pizza={pizza}/>)
+          })
+          }
+
         </div>
     </div>
   )
