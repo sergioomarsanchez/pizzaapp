@@ -1,7 +1,10 @@
 import Image from 'next/legacy/image'
 import style from '../styles/Cart.module.css'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Cart() {
+  const dispatch = useDispatch()
+  const cart = useSelector(state=>state.cart)
   return (
     <div className={style.container}>
         <div className={style.left}>
@@ -15,54 +18,34 @@ function Cart() {
                     <th>Quantity</th>
                     <th>Total</th>
                 </tr>
-                <tr className={style.tr}>
+                {cart.products?.map((product)=>(
+                    <tr className={style.tr} key={product._id}>
                     <td>
                       <div className={style.imgContainer}>
-                        <Image src='/img/pizza.png' alt=''  layout='fill' objectFit='cover'/>
+                        <Image src={product.img} alt=''  layout='fill' objectFit='cover'/>
                       </div>
                     </td>
                     <td>
-                      <span className={style.name}>CORALZO</span>
+                      <span className={style.name}>{product.title}</span>
                     </td>
                     <td>
                       <span className={style.extras}>
-                        Double ingredients, spicy sauce
+                        {product.extras?.map((extra)=>(
+                          <span key={extra._id}>{extra.text}, </span>
+                        ))}
                       </span>
                     </td>
                     <td>
-                      <span className={style.price}>$19.90</span>
+                      <span className={style.price}>${product.price}</span>
                     </td>
                     <td>
-                      <span className={style.quantity}>2</span>
+                      <span className={style.quantity}>{product.quantity}</span>
                     </td>
                     <td>
-                      <span className={style.total}>$39.80</span>
+                      <span className={style.total}>${product.price * product.quantity}</span>
                     </td>
                 </tr>
-                <tr className={style.tr}>
-                    <td>
-                      <div className={style.imgContainer}>
-                        <Image src='/img/pizza.png' alt=''  layout='fill' objectFit='cover'/>
-                      </div>
-                    </td>
-                    <td>
-                      <span className={style.name}>CORALZO</span>
-                    </td>
-                    <td>
-                      <span className={style.extras}>
-                        Double ingredients, spicy sauce
-                      </span>
-                    </td>
-                    <td>
-                      <span className={style.price}>$19.90</span>
-                    </td>
-                    <td>
-                      <span className={style.quantity}>2</span>
-                    </td>
-                    <td>
-                      <span className={style.total}>$39.80</span>
-                    </td>
-                </tr>
+                ))}
                 </tbody>
             </table>
         </div>
@@ -70,13 +53,13 @@ function Cart() {
           <div className={style.wrapper}>
             <h2 className={style.title}>CART TOTAL</h2>
             <div className={style.totalText}>
-                <b className={style.totalTextTitle}>Subtotal: </b>$79.60
+                <b className={style.totalTextTitle}>Subtotal: </b>${cart.total}
             </div>
             <div className={style.totalText}>
                 <b className={style.totalTextTitle}>Discount: </b>$0.00
             </div>
             <div className={style.totalText}>
-                <b className={style.totalTextTitle}>Total: </b>$79.60
+                <b className={style.totalTextTitle}>Total: </b>${cart.total}
             </div>
             <button className={style.button}>CHECKOUT NOW!</button>
           </div>
