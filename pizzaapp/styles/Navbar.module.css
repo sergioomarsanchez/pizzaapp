@@ -11,7 +11,7 @@
 }
 
 .item {
-    flex: 1;
+    flex: 0.6;
     display: flex;
     align-items: center;
 
@@ -19,11 +19,12 @@
 
 .item:nth-child(2){
     flex: 3;
+    display: flex;
     justify-content: space-around;
 }
 
-.item:nth-child(3){
-    justify-content: flex-end;
+.item:last-child{
+    width: 200px;
 }
 
 .callButton {
@@ -100,8 +101,11 @@ color: white;
         margin-left: 10px;
         color: white;
         }
-        .text:last-child {
-            font-size: 20px;
-            font-weight: bold;
-           }
+    .text:last-child {
+        font-size: 20px;
+        font-weight: bold;
+        }
+    .item:last-child{
+    width: 40px;
+}
 }

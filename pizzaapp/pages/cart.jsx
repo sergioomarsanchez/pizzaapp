@@ -1,10 +1,74 @@
 import Image from 'next/legacy/image'
 import style from '../styles/Cart.module.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from "react";
+import {
+    PayPalScriptProvider,
+    PayPalButtons,
+    usePayPalScriptReducer
+} from "@paypal/react-paypal-js";
+
 
 function Cart() {
+  const [open, setOpen] = useState(false)
+  const amount = "2";
+  const currency = "USD";
+
   const dispatch = useDispatch()
   const cart = useSelector(state=>state.cart)
+
+  const ButtonWrapper = ({ currency, showSpinner }) => {
+    // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
+    // This is the main reason to wrap the PayPalButtons in a new component
+    const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+    
+    useEffect(() => {
+        dispatch({
+            type: "resetOptions",
+            value: {
+                ...options,
+                currency: currency,
+            },
+        });
+    }, [currency, showSpinner]); 
+
+
+    return (<>
+      { (showSpinner && isPending) && <div className="spinner" /> }
+      <PayPalButtons
+          style={style}
+          disabled={false}
+          forceReRender={[amount, currency, style]}
+          fundingSource={undefined}
+          createOrder={(data, actions) => {
+              return actions.order
+                  .create({
+                      purchase_units: [
+                          {
+                              amount: {
+                                  currency_code: currency,
+                                  value: amount,
+                              },
+                          },
+                      ],
+                  })
+                  .then((orderId) => {
+                      // Your code here after create the order
+                      return orderId;
+                  });
+          }}
+          onApprove={function (data, actions) {
+              return actions.order.capture().then(function (details) {
+                console.log(details)
+              });
+          }}
+      />
+  </>
+);
+}
+
+
+
   return (
     <div className={style.container}>
         <div className={style.left}>
@@ -56,12 +120,33 @@ function Cart() {
                 <b className={style.totalTextTitle}>Subtotal: </b>${cart.total}
             </div>
             <div className={style.totalText}>
-                <b className={style.totalTextTitle}>Discount: </b>$0.00
+                <b className={style.totalTextTitle}>Discount: </b>$0
             </div>
             <div className={style.totalText}>
                 <b className={style.totalTextTitle}>Total: </b>${cart.total}
             </div>
-            <button className={style.button}>CHECKOUT NOW!</button>
+            {open?(
+              <div className={style.paymentMethods}>
+                <button className={style.button}>CASH ON DELIVERY</button>
+                <div>
+            <PayPalScriptProvider
+                options={{
+                    "client-id": "AYT9QD38lZm9-lh1S9vCEDjH-mMC7TQ6VrdI1ADsJeOb4vOUH4kwuEIGDdYdabJWu44O0C5wrIsxgwjz",
+                    components: "buttons",
+                    currency: "USD"
+                    }}
+                    > 
+                <ButtonWrapper
+                            currency={currency}
+                            showSpinner={false}
+                        />
+            </PayPalScriptProvider>
+                </div>
+              </div>
+              ):(
+                <button className={style.button} onClick={()=>setOpen(true)}>CHECKOUT NOW!</button>
+                
+            )}
           </div>
         </div>
     </div>
