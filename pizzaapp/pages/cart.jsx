@@ -15,6 +15,7 @@ import {
 function Cart() {
   const cart = useSelector(state=>state.cart)
   const [open, setOpen] = useState(false)
+  const [cash, setCash] = useState(false)
   const amount = cart.total;
   const currency = "USD";
   const dispatch = useDispatch()
@@ -147,7 +148,7 @@ function Cart() {
             </div>
             {open?(
               <div className={style.paymentMethods}>
-                <button className={style.button}>CASH ON DELIVERY</button>
+                <button onClick={()=>setCash(true)} className={style.button}>CASH ON DELIVERY</button>
                 <div>
             <PayPalScriptProvider
                 options={{
@@ -171,6 +172,15 @@ function Cart() {
         </div>
     </div>
   )
+}
+
+export const getServerSideProps = async ({params})=>{
+  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
+  return {
+      props:{
+      order: res.data
+    }
+  }
 }
 
 export default Cart

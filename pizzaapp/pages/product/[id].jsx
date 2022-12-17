@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import style from '../../styles/Product.module.css'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../../redux/cartSlice'
  
@@ -11,7 +12,7 @@ function Product({pizza}) {
     const [quantity, setQuantity] = useState(1)
     const [extras, setExtras] = useState([])
     const dispatch = useDispatch()
-
+    const router = useRouter()
     const changePrice = (number) =>{
         setPrice((price+number))
     }
@@ -34,6 +35,7 @@ function Product({pizza}) {
 
     const handleClick = ()=>{
         dispatch(addProduct({...pizza, extras, price, quantity}))
+        router.push('/cart')
     }
 
   return (
