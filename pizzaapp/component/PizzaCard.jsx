@@ -4,7 +4,6 @@ import style from '../styles/PizzaCard.module.css'
 import Link from 'next/link'
 
 function PizzaCard({pizza}) {
-  console.log(pizza)
   return (
     <div className={style.container}>
         <Link href={`/product/${pizza._id}`} passHref>

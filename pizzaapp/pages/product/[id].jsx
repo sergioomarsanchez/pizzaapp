@@ -73,7 +73,7 @@ function Product({pizza}) {
                 })}
             </div>
             <div className={style.add}>
-                <input onChange={(e)=>setQuantity(e.target.value)} type="number" defaultValue={1} value={quantity} className={style.quantity}/>
+                <input onChange={(e)=>setQuantity(e.target.value)} type="number"  value={quantity} className={style.quantity}/>
                 <button className={style.button} onClick={handleClick} >Add to Cart</button>
 
             </div>

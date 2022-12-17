@@ -2,6 +2,9 @@ import Image from 'next/legacy/image'
 import style from '../styles/Cart.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import { reset } from '../redux/cartSlice'
 import {
     PayPalScriptProvider,
     PayPalButtons,
@@ -10,12 +13,23 @@ import {
 
 
 function Cart() {
-  const [open, setOpen] = useState(false)
-  const amount = "2";
-  const currency = "USD";
-
-  const dispatch = useDispatch()
   const cart = useSelector(state=>state.cart)
+  const [open, setOpen] = useState(false)
+  const amount = cart.total;
+  const currency = "USD";
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const createOrder = async (data)=>{
+    try {
+      const res = await axios.post("http://localhost:3000/api/orders", data)
+      res.status === 201 && router.push('/orders/'+res.data._id)
+      dispatch(reset())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  console.log(open)
 
   const ButtonWrapper = ({ currency, showSpinner }) => {
     // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
@@ -59,7 +73,13 @@ function Cart() {
           }}
           onApprove={function (data, actions) {
               return actions.order.capture().then(function (details) {
-                console.log(details)
+                const shipping = details.purchase_units[0].shipping;
+                createOrder({
+                  customer: shipping.name.full_name,
+                  address:shipping.address.address_line_1,
+                  total:cart.total,
+                  method:1,
+                  })
               });
           }}
       />
