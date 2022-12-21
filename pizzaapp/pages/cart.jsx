@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { reset } from '../redux/cartSlice'
+import OrderDetail from '../component/OrderDetail';
 import {
     PayPalScriptProvider,
     PayPalButtons,
@@ -170,17 +171,12 @@ function Cart() {
             )}
           </div>
         </div>
+        {cash && (
+          <OrderDetail total={cart.total} createOrder={createOrder} setCash={setCash}/>
+        )}
     </div>
   )
 }
 
-export const getServerSideProps = async ({params})=>{
-  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
-  return {
-      props:{
-      order: res.data
-    }
-  }
-}
 
 export default Cart

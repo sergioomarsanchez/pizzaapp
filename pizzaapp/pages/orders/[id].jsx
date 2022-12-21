@@ -83,7 +83,7 @@ function Order({order}) {
             <div className={style.totalText}>
                 <b className={style.totalTextTitle}>Total: </b>${order.total}
             </div>
-                <button disabled className={style.button}>PAID!</button>
+                <button disabled className={style.button}>{order.method===0? 'PAYMENT ON DELIVERY' : 'PAID!' }</button>
           </div>
         </div>
     </div>
