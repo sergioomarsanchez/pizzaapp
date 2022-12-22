@@ -10,12 +10,28 @@ function Index({ orders, products }) {
 
    async function  handleDelete(id){
         try {
-            const res = await axios.delete('http://localhost:3000/api/products'+id)
+            const res = await axios.delete('http://localhost:3000/api/products/'+id)
             setpizzaList(pizzaList.filter((pizza)=> pizza._id!==id))
         } catch (error) {
             console.log(error)
         }
     }
+
+    async function handleStatus(id){
+        const item = orderList.filter(order=>order._id===id)[0]
+        const currentStatus = item.status
+
+        try {
+            const res = await axios.put('http://localhost:3000/api/orders/'+id, {status:currentStatus+1})
+            setOrderList([
+                res.data,
+                ...orderList.filter(order=>order._id!== id)
+            ])
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
   return (
     <div className={style.container}>
         <div className={style.item}>
@@ -62,15 +78,15 @@ function Index({ orders, products }) {
                     </tr>
                 </tbody>
                 {orderList?.map((order)=>{return(
-                <tbody>
+                <tbody key={order._id}>
                     <tr className={style.trTitle}>
                         <td>{order._id.slice(0,5)}...</td>
                         <td>{order.customer}</td>
                         <td>${order.total}</td>
-                        <td>{order.method===0?'Cash':'Paypal'}</td>
-                        <td>{order.status===0?'Preparing':order.status===1?'Delivering':'Delivered'}</td>
+                        <td>{order.method===0?<span>Cash</span>:<span>Paid</span>}</td>
+                        <td>{order.status===0?'Preparing':order.status===1?'On the way':'Delivered'}</td>
                         <td>
-                            <button className={style.nextStage}>Next Stage</button>
+                            <button onClick={()=>handleStatus(order._id)} className={style.nextStage}>Next Stage</button>
                         </td>
                     </tr>
                 </tbody>
