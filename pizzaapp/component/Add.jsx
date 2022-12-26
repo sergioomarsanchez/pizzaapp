@@ -11,6 +11,8 @@ function Add({ setClose }) {
     const [extraOptions, setextraOptions] = useState([])
     const [extra, setExtra] = useState(null)
 
+    const router = useRouter()
+
     const changePrice = (e, index)=>{
         const currentPrices = prices
         currentPrices[index] = e.target.value
@@ -41,7 +43,7 @@ function Add({ setClose }) {
 
             await axios.post('http://localhost:3000/api/products', newProduct)
             setClose(true)
-
+            router.push('/admin')
         } catch (error) {
             console.log(error)
         }

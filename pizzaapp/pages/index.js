@@ -3,6 +3,7 @@ import axios from 'axios'
 import Featured from '../component/Featured'
 import PizzaList from '../component/PizzaList'
 import styles from '../styles/Home.module.css'
+import LogInButton from '../component/LogInButton'
 import AddButton from '../component/AddButton'
 import Add from '../component/Add'
 import { useState } from 'react'
@@ -18,11 +19,12 @@ export default function Home({pizzaList, admin}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured/>
+      { !admin?
+      <LogInButton/>
+      :null}
       { admin?
       <AddButton setClose={setClose} />
-      :null
-
-      }
+      :null}
       <PizzaList pizzaList={pizzaList}/>
       { !close?
       <Add setClose={setClose} />

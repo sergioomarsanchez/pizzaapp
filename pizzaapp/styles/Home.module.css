@@ -1,0 +1,13 @@
+.LogInButton{
+    width: 10%;
+    margin-top: 50px;
+    background-color: teal;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px 0px;
+    align-self: flex-end;
+    border-radius: 10px;
+    border: 2px solid black;
+}
