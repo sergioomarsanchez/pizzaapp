@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 import LogInButton from '../component/LogInButton'
 import AddButton from '../component/AddButton'
 import Add from '../component/Add'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export default function Home({pizzaList, admin}) {
@@ -19,12 +20,21 @@ export default function Home({pizzaList, admin}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured/>
-      { !admin?
-      <LogInButton/>
-      :null}
-      { admin?
-      <AddButton setClose={setClose} />
-      :null}
+      <div className={styles.buttonsContainer}> 
+          { !admin?
+          <LogInButton/>
+          :null}
+          { admin?
+          <AddButton setClose={setClose} />
+          :null}
+                { admin?
+          <Link href='/admin' passHref>
+          <button className={styles.adminButton}>
+            Admin Panel
+          </button>
+          </Link>
+          :null}
+      </div>
       <PizzaList pizzaList={pizzaList}/>
       { !close?
       <Add setClose={setClose} />
