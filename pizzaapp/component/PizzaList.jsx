@@ -12,7 +12,7 @@ function PizzaList({pizzaList}) {
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
          nisi ut aliquip ex ea commodo consequat.</p>
         <div className={style.wrapper}>
-          {pizzaList.map(pizza=>{
+          {pizzaList?.map(pizza=>{
             return(<PizzaCard key={pizza._id} pizza={pizza}/>)
           })
           }

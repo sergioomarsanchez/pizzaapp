@@ -34,7 +34,7 @@ function Featured() {
         </div>
         <div className={styles.wrapper} style={{transform: `translateX(${-100*index}VW)`}}>
                 {
-                    images.map((img, i)=>(
+                    images?.map((img, i)=>(
                     <div className={styles.imgContainer}  key={i} >
                 <Image src={img} alt='' layout='fill' objectFit='contain'/>
                     </div>
