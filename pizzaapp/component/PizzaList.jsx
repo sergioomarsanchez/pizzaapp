@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from '../styles/PizzaList.module.css'
 import PizzaCard from './PizzaCard'
 
 
 function PizzaList({pizzaList}) {
+  const [pizzaList, setPizzaList] = useState(pizzaList)
   return (
     <div className={style.container}>
         <h1 className={style.title}>The best Pizza in Town</h1>

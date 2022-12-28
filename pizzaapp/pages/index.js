@@ -11,6 +11,7 @@ import { useState } from 'react'
 
 export default function Home({pizzaList, admin}) {
   const [close, setClose] = useState(true)
+  const [pizzaList, setPizzaList] = useState(pizzaList)
 
   return (
     <div className={styles.container}>
