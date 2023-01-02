@@ -11,6 +11,7 @@ function Index({ orders, products }) {
     const [pizzaList, setpizzaList] = useState(products)
     const [orderList, setOrderList] = useState(orders)
 
+
    async function  handleDelete(id){
         try {
             const res = await axios.delete('https://pizzaapp-tau.vercel.app/api/products/'+id)
@@ -118,8 +119,9 @@ export const getServerSideProps = async (ctx)=>{
 
     return{
         props:{
-            orders: orderRes.data,
-            products: productRes.data
+            orders: JSON.parse(JSON.stringify(orderRes)),
+            products: JSON.parse(JSON.stringify(productRes
+                ))
         }
     }
 }
