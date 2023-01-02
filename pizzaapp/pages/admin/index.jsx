@@ -12,23 +12,46 @@ function Index({ orders, products }) {
     const [orderList, setOrderList] = useState(orders)
 
 
-   async function  handleDelete(id){
+   async function  handleDelete(id, ctx){
+    const myCookie = ctx.req?.cookies || ''
+
+    if(myCookie.token !== process.env.TOKEN){
+        return{
+            redirect:{
+                destination:'admin/login',
+                permanent: false,
+            }
+        }
+    }
         try {
-            const res = await axios.delete('https://pizzaapp-tau.vercel.app/api/products/'+id)
+            dbConnect()
+            const res = await Product.findByIdAndDelete(id)
             setpizzaList(pizzaList.filter((pizza)=> pizza._id!==id))
         } catch (error) {
             console.log(error)
         }
     }
 
-    async function handleStatus(id){
+    async function handleStatus(id, ctx){
+        const myCookie = ctx.req?.cookies || ''
+
+        if(myCookie.token !== process.env.TOKEN){
+            return{
+                redirect:{
+                    destination:'admin/login',
+                    permanent: false,
+                }
+            }
+        }
         const item = orderList.filter(order=>order._id===id)[0]
         const currentStatus = item.status
 
         try {
-            const res = await axios.put('https://pizzaapp-tau.vercel.app/api/orders/'+id, {status:currentStatus+1})
+            const res = await Order.findByIdAndUpdate(id,{status:currentStatus+1}, {
+                new: true,
+                }) 
             setOrderList([
-                res.data,
+                JSON.parse(JSON.stringify(res)),
                 ...orderList.filter(order=>order._id!== id)
             ])
         } catch (error) {
@@ -120,8 +143,7 @@ export const getServerSideProps = async (ctx)=>{
     return{
         props:{
             orders: JSON.parse(JSON.stringify(orderRes)),
-            products: JSON.parse(JSON.stringify(productRes
-                ))
+            products: JSON.parse(JSON.stringify(productRes))
         }
     }
 }

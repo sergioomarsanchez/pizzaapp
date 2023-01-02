@@ -1,4 +1,6 @@
 import style from '../styles/Add.module.css'
+import dbConnect from '../util/mongo'
+import Product from '../models/Product'
 import { useState } from 'react'
 import axios from 'axios'
 import { useRouter} from 'next/router'
@@ -40,8 +42,8 @@ function Add({ setClose }) {
                 extraOptions,
                 img: url,
             }
-
-            await axios.post('https://pizzaapp-tau.vercel.app//api/products', newProduct)
+            dbConnect()
+            await Product.create(newProduct)
             setClose(true)
             router.push('/admin')
         } catch (error) {

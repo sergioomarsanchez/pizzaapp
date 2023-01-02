@@ -1,4 +1,6 @@
 import Image from 'next/legacy/image'
+import dbConnect from '../util/mongo'
+import Order from '../models/Order'
 import style from '../styles/Cart.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
@@ -24,14 +26,14 @@ function Cart() {
 
   const createOrder = async (data)=>{
     try {
-      const res = await axios.post("https://pizzaapp-tau.vercel.app/api/orders", data)
-      res.status === 201 && router.push('/orders/'+res.data._id)
+      dbConnect()
+      const res = await Order.create(data)
+      res.status === 201 && router.push('/orders/'+JSON.parse(JSON.stringify(res.data._id)))
       dispatch(reset())
     } catch (error) {
       console.log(error)
     }
   }
-  console.log(open)
 
   const ButtonWrapper = ({ currency, showSpinner }) => {
     // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
