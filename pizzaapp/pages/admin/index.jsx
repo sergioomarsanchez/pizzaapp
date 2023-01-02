@@ -1,4 +1,7 @@
 import style from '../../styles/Admin.module.css'
+import dbConnect from '../../../util/mongo'
+import Product from '../../../models/Product'
+import Order from '../../../models/Order'
 import { useState } from 'react'
 import Image from 'next/image'
 import React from 'react'
@@ -109,8 +112,9 @@ export const getServerSideProps = async (ctx)=>{
             }
         }
     }
-    const productRes = await axios.get('https://pizzaapp-tau.vercel.app/api/products')
-    const orderRes = await axios.get('https://pizzaapp-tau.vercel.app/api/orders')
+    await dbConnect();
+    const productRes = await Product.find();
+    const orderRes = await Order.find()
 
     return{
         props:{
