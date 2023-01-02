@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import axios from 'axios'
+import dbConnect from '../../../util/mongo'
+import Product from '../../../models/Product'
 import Featured from '../component/Featured'
 import PizzaList from '../component/PizzaList'
 import styles from '../styles/Home.module.css'
@@ -11,7 +12,7 @@ import { useState } from 'react'
 
 export default function Home({pizzaList, admin}) {
   const [close, setClose] = useState(true)
-  const [pizzaList, setPizzaList] = useState(pizzaList)
+
 
   return (
     <div className={styles.container}>
@@ -53,11 +54,12 @@ export const getServerSideProps = async (ctx)=>{
   if(myCookie.token === process.env.TOKEN){
       admin = true
       }
-  const res = await axios.get('https://pizzaapp-tau.vercel.app/api/products')
-  return {
-      props:{
-      pizzaList: res.data,
-      admin
-    }
-  }
-}
+      await dbConnect();
+      const res = await Product.find();
+      return {
+        props: {
+          pizzaList: JSON.parse(JSON.stringify(res)),
+          admin,
+        },
+      };
+    };

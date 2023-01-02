@@ -4,7 +4,7 @@ import PizzaCard from './PizzaCard'
 
 
 function PizzaList({pizzaList}) {
-  const [pizzaList, setPizzaList] = useState(pizzaList)
+
   return (
     <div className={style.container}>
         <h1 className={style.title}>The best Pizza in Town</h1>
