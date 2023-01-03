@@ -31,7 +31,7 @@ function Cart() {
       res.status === 201 && router.push('/orders/'+JSON.parse(JSON.stringify(res.data._id)))
       dispatch(reset())
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data)
     }
   }
 

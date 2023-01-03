@@ -14,7 +14,7 @@ export default async function handler(req, res) {
                const order = await Order.findById(id)
                 res.status(200).json(order)
               } catch (error) {
-                res.status(500).json(error)
+                res.status(500).json(error.response.data)
               }
     }
     if (method==='PUT') {
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
             })
           res.status(200).json(order)
         } catch (error) {
-           res.status(500).json(error)
+           res.status(500).json(error.response.data)
         }
     }
     if (method==='DELETE') {

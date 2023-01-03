@@ -12,7 +12,7 @@ export default async function handler(req, res) {
             const orders = await Order.find()
              res.status(201).json(orders)
           } catch (error) {
-            res.status(500).json(err)
+            res.status(500).json(error.response.data)
           }
     }
     if (method==='POST') {
@@ -20,8 +20,8 @@ export default async function handler(req, res) {
           const order = await Order.create(req.body)
          res.status(201).json(order)
 
-        } catch (err) {
-          res.status(500).json(err)
+        } catch (error) {
+          res.status(500).json(error.response.data)
         }
     }
 

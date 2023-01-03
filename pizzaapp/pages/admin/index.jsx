@@ -1,7 +1,4 @@
 import style from '../../styles/Admin.module.css'
-import dbConnect from '../../util/mongo'
-import Product from '../../models/Product'
-import Order from '../../models/Order'
 import { useState } from 'react'
 import Image from 'next/image'
 import React from 'react'
@@ -24,11 +21,11 @@ function Index({ orders, products }) {
         }
     }
         try {
-            dbConnect()
-            const res = await Product.findByIdAndDelete(id)
+           
+            const res = await axios.delete('https://pizzaapp-tau.vercel.app/api/products', id)
             setpizzaList(pizzaList.filter((pizza)=> pizza._id!==id))
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
         }
     }
 
@@ -47,15 +44,13 @@ function Index({ orders, products }) {
         const currentStatus = item.status
 
         try {
-            const res = await Order.findByIdAndUpdate(id,{status:currentStatus+1}, {
-                new: true,
-                }) 
+            const res = await axios.put('https://pizzaapp-tau.vercel.app/api/orders' + id, { status:currentStatus + 1 }) 
             setOrderList([
-                JSON.parse(JSON.stringify(res)),
+                res.data,
                 ...orderList.filter(order=>order._id!== id)
             ])
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
         }
     }
 
@@ -136,14 +131,13 @@ export const getServerSideProps = async (ctx)=>{
             }
         }
     }
-    await dbConnect();
-    const productRes = await Product.find();
-    const orderRes = await Order.find()
+    const productRes = await axios.get('https://pizzaapp-tau.vercel.app/api/products')
+    const orderRes = await axios.get('https://pizzaapp-tau.vercel.app/api/orders')
 
     return{
         props:{
-            orders: JSON.parse(JSON.stringify(orderRes)),
-            products: JSON.parse(JSON.stringify(productRes))
+            orders: orderRes.data,
+            products: productRes.data
         }
     }
 }

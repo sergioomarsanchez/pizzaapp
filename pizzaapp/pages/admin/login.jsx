@@ -17,7 +17,7 @@ function Login() {
                 if(error)setError(false)
                 router.push('/admin')
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
             setError(true)
         }
     }

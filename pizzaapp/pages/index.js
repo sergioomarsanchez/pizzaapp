@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import axios from 'axios'
 import dbConnect from '../util/mongo'
 import Product from '../models/Product'
 import Featured from '../component/Featured'
@@ -54,12 +55,12 @@ export const getServerSideProps = async (ctx)=>{
   if(myCookie.token === process.env.TOKEN){
       admin = true
       }
-      await dbConnect();
-      const res = await Product.find();
-      return {
-        props: {
-          pizzaList: JSON.parse(JSON.stringify(res)),
-          admin,
-        },
-      };
+       const res = await axios.get('https://pizzaapp-tau.vercel.app/api/products')
+       return {
+         props: {
+           pizzaList: res.data,
+           admin,
+         },
+       };
+
     };

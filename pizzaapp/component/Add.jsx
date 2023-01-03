@@ -1,6 +1,4 @@
 import style from '../styles/Add.module.css'
-import dbConnect from '../util/mongo'
-import Product from '../models/Product'
 import { useState } from 'react'
 import axios from 'axios'
 import { useRouter} from 'next/router'
@@ -42,12 +40,12 @@ function Add({ setClose }) {
                 extraOptions,
                 img: url,
             }
-            dbConnect()
-            await Product.create(newProduct)
+
+            await axios.post('http://localhost:3000/api/products', newProduct)
             setClose(true)
             router.push('/admin')
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
         }
     }
 
