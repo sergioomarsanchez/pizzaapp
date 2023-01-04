@@ -28,7 +28,7 @@
     border-radius: 5px;
     cursor:not-allowed;
 }
-.button:last-child{
+.button:nth-child(2){
     background-color: crimson;
     margin-right: 10px;
 }
