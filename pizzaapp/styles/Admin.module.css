@@ -20,7 +20,14 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
+.nextStage:first-child:disabled{
+    border: none;
+    background-color: gray;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 5px;
+    cursor:not-allowed;
+}
 .button:last-child{
     background-color: crimson;
     margin-right: 10px;
