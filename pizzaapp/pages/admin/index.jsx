@@ -13,7 +13,7 @@ function Index({ orders, products }) {
 
         try {
            
-            const res = await axios.delete('https://pizzaapp-tau.vercel.app/api/products/', id)
+            const res = await axios.delete('https://pizzaapp-tau.vercel.app/api/products/' + id)
             setpizzaList(pizzaList.filter((pizza)=> pizza._id!==id))
         } catch (error) {
             console.log(error)
