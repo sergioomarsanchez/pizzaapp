@@ -41,7 +41,7 @@ function Add({ setClose }) {
                 img: url,
             }
 
-            await axios.post('http://localhost:3000/api/products', newProduct)
+            await axios.post('https://pizzaapp-tau.vercel.app/api/products', newProduct)
             setClose(true)
             router.push('/admin')
         } catch (error) {
