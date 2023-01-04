@@ -1,6 +1,4 @@
 import Image from 'next/legacy/image'
-import dbConnect from '../util/mongo'
-import Order from '../models/Order'
 import style from '../styles/Cart.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
@@ -8,11 +6,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { reset } from '../redux/cartSlice'
 import OrderDetail from '../component/OrderDetail';
-import {
-    PayPalScriptProvider,
-    PayPalButtons,
-    usePayPalScriptReducer
-} from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 
 function Cart() {
@@ -26,9 +20,8 @@ function Cart() {
 
   const createOrder = async (data)=>{
     try {
-      dbConnect()
-      const res = await Order.create(data)
-      res.status === 201 && router.push('/orders/'+JSON.parse(JSON.stringify(res.data._id)))
+      const res = await axios.post('https://pizzaapp-tau.vercel.app/api/orders', data)
+      res.status === 201 && router.push('/orders/' + res.data._id)
       dispatch(reset())
     } catch (error) {
       console.log(error.response.data)
