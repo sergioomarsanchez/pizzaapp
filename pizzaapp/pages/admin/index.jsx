@@ -9,37 +9,19 @@ function Index({ orders, products }) {
     const [orderList, setOrderList] = useState(orders)
 
 
-   async function  handleDelete(id, ctx){
-    const myCookie = ctx.req?.cookies || ''
+   async function  handleDelete(id){
 
-    if(myCookie.token !== process.env.TOKEN){
-        return{
-            redirect:{
-                destination:'admin/login',
-                permanent: false,
-            }
-        }
-    }
         try {
            
             const res = await axios.delete('https://pizzaapp-tau.vercel.app/api/products', id)
             setpizzaList(pizzaList.filter((pizza)=> pizza._id!==id))
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error)
         }
     }
 
-    async function handleStatus(id, ctx){
-        const myCookie = ctx.req?.cookies || ''
+    async function handleStatus(id){
 
-        if(myCookie.token !== process.env.TOKEN){
-            return{
-                redirect:{
-                    destination:'admin/login',
-                    permanent: false,
-                }
-            }
-        }
         const item = orderList.filter(order=>order._id===id)[0]
         const currentStatus = item.status
 
@@ -50,7 +32,7 @@ function Index({ orders, products }) {
                 ...orderList.filter(order=>order._id!== id)
             ])
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error)
         }
     }
 
