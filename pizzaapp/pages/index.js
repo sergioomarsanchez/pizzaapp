@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import axios from 'axios'
-import dbConnect from '../util/mongo'
-import Product from '../models/Product'
 import Featured from '../component/Featured'
 import PizzaList from '../component/PizzaList'
 import styles from '../styles/Home.module.css'
