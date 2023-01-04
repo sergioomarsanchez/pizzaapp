@@ -90,7 +90,7 @@ function Index({ orders, products }) {
                         <td>{order.method===0?<span>Cash</span>:<span>Paid</span>}</td>
                         <td>{order.status===0?'Preparing':order.status===1?'On the way':'Delivered'}</td>
                         <td>
-                            <button onClick={()=>handleStatus(order._id)} className={style.nextStage}>Next Stage</button>
+                            <button disabled={order.status>1?true:false} onClick={()=>handleStatus(order._id)} className={style.nextStage}>Next Stage</button>
                         </td>
                     </tr>
                 </tbody>
