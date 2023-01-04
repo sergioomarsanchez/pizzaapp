@@ -1,6 +1,7 @@
 import style from '../../styles/Admin.module.css'
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import axios from 'axios'
 
@@ -91,6 +92,9 @@ function Index({ orders, products }) {
                         <td>{order.status===0?'Preparing':order.status===1?'On the way':'Delivered'}</td>
                         <td>
                             <button disabled={order.status>1?true:false} onClick={()=>handleStatus(order._id)} className={style.nextStage}>Next Stage</button>
+                            <Link href={`/orders/${order._id}`} passHref>
+                            <button className={style.nextStage}>Check order Detail</button>
+                            </Link>
                         </td>
                     </tr>
                 </tbody>
