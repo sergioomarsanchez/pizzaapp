@@ -4,6 +4,7 @@
     display: flex;
 }
 
+
 .item{
     flex: 1;
     position: relative;
@@ -37,12 +38,50 @@
     color: rgb(188, 102, 102);
 }
 
+.home{
+  display: none;
+}
+    
+
 @media screen and (max-width:480px) {
 
     .container{
         height: auto;
         text-align: center;
+        position: relative;
     }
+    .home{
+        display: flex;
+        width: 30px;
+        height: 30px;
+        padding: 0.5rem;
+        font-size: 10px;
+        color: #d1411e;
+        text-align: center;
+        align-self: flex-end;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+        
+    .homeButton{
+        width: 30px;
+        height: 30px;
+        background-color: #d1411e;
+        margin-top: 0.5rem;
+        border: 1px solid rebeccapurple;
+        border-radius: 8px;
+        transition: 1s ease;
+        animation: size 2s infinite linear;
+    }
+    
+    @keyframes size {
+        0% {transform: scale(1)}
+        50% {transform: scale(1.1)}
+        100% {transform: scale(1)}
+    }
+
   .item:first-child{
       display: none;
   }

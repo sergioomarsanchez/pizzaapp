@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import style from '../styles/Footer.module.css'
+import Link from 'next/link'
 
 function Footer() {
   return (
@@ -8,6 +9,12 @@ function Footer() {
      <div className={style.item}>
        <Image src='/img/bg.png' alt='' layout='fill'/>
      </div>
+         <div className={style.home}>
+           Home
+           <Link href='/' passHref>
+          <img className={style.homeButton} src='/img/home.png' alt=''/>
+           </Link>
+         </div>
      <div className={style.item}>
      <div className={style.card}>
        <h2 className={style.motto}>
@@ -30,11 +37,6 @@ function Footer() {
          López Obrador 1343 #342.
          <br/>Córdoba, 5000
          <br/>(325) 121-4533
-       </p>
-       <p className={style.text}>
-         Velez Sarsfield 3943 #124.
-         <br/>Córdoba, 5000
-         <br/>(325) 121-4532
        </p>
      </div>
      <div className={style.card}>

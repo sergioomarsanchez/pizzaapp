@@ -63,7 +63,7 @@ function Index({ orders, products }) {
                                 <td>
                                     <button className={style.button}>Edit</button>
                                     <button className={style.button} onClick={()=>handleDelete(pizza._id)}>Delete</button>
-                                    <Link href={`/products/${pizza._id}`} passHref>
+                                    <Link href={`/product/${pizza._id}`} passHref>
                                     <button className={style.button}>Check pizza Detail</button>
                                     </Link>
                                 </td>
