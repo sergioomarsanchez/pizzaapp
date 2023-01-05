@@ -1,20 +1,23 @@
 import Image from 'next/image'
 import React from 'react'
 import style from '../styles/Footer.module.css'
-import Link from 'next/link'
+import { useRouter} from 'next/router'
 
 function Footer() {
+  const router = useRouter()
+  function handleClick(){
+    router.push('/')
+  }
+
   return (
     <div className={style.container}>
      <div className={style.item}>
        <Image src='/img/bg.png' alt='' layout='fill'/>
      </div>
-         <div className={style.home}>
+         <div onClick={()=>handleClick()} className={style.home}>
            Home
-           <Link href='/' passHref>
-          <img className={style.homeButton} src='/img/home.png' alt=''/>
-           </Link>
-         </div>
+            <img className={style.homeButton} src='/img/home.png' alt=''/>
+          </div>
      <div className={style.item}>
      <div className={style.card}>
        <h2 className={style.motto}>
