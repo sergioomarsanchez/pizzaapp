@@ -4,12 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 function Index({ orders, products }) {
     const [pizzaList, setpizzaList] = useState(products)
     const [orderList, setOrderList] = useState(orders)
 
-
+    const router = useRouter()
    async function  handleDelete(id){
 
         try {
@@ -32,6 +33,7 @@ function Index({ orders, products }) {
                 res.data,
                 ...orderList.filter(order=>order._id!== id)
             ])
+            router.push('/orders/'+id)
         } catch (error) {
             console.log(error)
         }
