@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+mongoose.set('strictQuery', false);
 const MONGO_URL = process.env.MONGO_URL
 
 if (!MONGO_URL) {

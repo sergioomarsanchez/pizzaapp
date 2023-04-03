@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function LogInButton() {
   return (
-    <Link Link href='/admin/login' passHref>
+    <Link href='/admin/login' passHref>
     <button className={style.LogInButton}>
         Log in as Admin
     </button>
