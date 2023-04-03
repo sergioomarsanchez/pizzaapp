@@ -20,7 +20,7 @@ function PizzaCard({pizza}) {
 }
 
 export const getServerSideProps = async ({params})=>{
-  const res = await axios.get(`http://localhost:3000/profile/${params.id}`)
+  const res = await axios.get(`https://pizzaapp-qxtve4bkw-sergioomarsanchez.vercel.app/profile/${params.id}`)
   return {
       props:{
       user: res.data

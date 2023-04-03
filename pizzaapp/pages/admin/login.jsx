@@ -13,7 +13,7 @@ function Login() {
 
     async function handleClick(){
         try {
-                await axios.post('https://pizzaapp-tau.vercel.app/api/login',{username, password})
+                await axios.post('https://pizzaapp-qxtve4bkw-sergioomarsanchez.vercel.app/api/login',{username, password})
                 if(error)setError(false)
                 router.push('/admin')
         } catch (error) {
