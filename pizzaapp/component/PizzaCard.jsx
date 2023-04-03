@@ -19,4 +19,13 @@ function PizzaCard({pizza}) {
   )
 }
 
+export const getServerSideProps = async ({params})=>{
+  const res = await axios.get(`http://localhost:3000/profile/${params.id}`)
+  return {
+      props:{
+      user: res.data
+    }
+  }
+}
+
 export default PizzaCard
