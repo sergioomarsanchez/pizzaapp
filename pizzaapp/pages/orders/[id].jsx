@@ -92,7 +92,7 @@ function Order({order}) {
 
 
 export const getServerSideProps = async ({params})=>{
-    const res = await axios.get(`https://pizzaapp-qxtve4bkw-sergioomarsanchez.vercel.app/api/orders/${params.id}`)
+    const res = await axios.get(`https://pizzaapp-tau.vercel.app/api/orders/${params.id}`)
     return {
         props:{
         order: res.data

@@ -53,7 +53,10 @@ export const getServerSideProps = async (ctx)=>{
   if(myCookie.token === process.env.TOKEN){
       admin = true
       }
-       const res = await axios.get('https://pizzaapp-qxtve4bkw-sergioomarsanchez.vercel.app/api/products')
+       const res = await axios.get('https://pizzaapp-tau.vercel.app/api/products', {
+        // ✅ set Accept-Encoding header
+        headers: {'Accept-Encoding': 'gzip,deflate,compress'},
+      })
        return {
          props: {
            pizzaList: res.data,
